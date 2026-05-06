@@ -139,7 +139,10 @@ if page == "proyectos":
     df_view = filter_bar(df_all.copy(), "proy") if not df_all.empty else df_all
 
     st.subheader("Registro de Proyectos")
-    st.dataframe(df_view, use_container_width=True, hide_index=True) if not df_view.empty else st.info("Sin proyectos registrados.")
+    if not df_view.empty:
+        st.dataframe(df_view, use_container_width=True, hide_index=True)
+    else:
+        st.info("Sin proyectos registrados.")
 
     st.markdown("---")
     tab_new, tab_edit = st.tabs(["➕ Nuevo Proyecto", "✏️ Editar / Eliminar"])
@@ -215,7 +218,10 @@ def permit_page(title, table, fields_fn, insert_fn, update_fn):
     df_view = filter_bar(df_all.copy(), table.lower()) if not df_all.empty else df_all
 
     st.subheader("Registros")
-    st.dataframe(df_view, use_container_width=True, hide_index=True) if not df_view.empty else st.info("Sin registros para el filtro seleccionado.")
+    if not df_view.empty:
+        st.dataframe(df_view, use_container_width=True, hide_index=True)
+    else:
+        st.info("Sin registros para el filtro seleccionado.")
 
     st.markdown("---")
     if not dorsales:
@@ -515,7 +521,10 @@ elif page == "historial":
 
     st.subheader("Registros de Historial")
     display_cols = [c for c in df_view.columns if c != "ID"]
-    st.dataframe(df_view[display_cols], use_container_width=True, hide_index=True) if not df_view.empty else st.info("Sin registros aún.")
+    if not df_view.empty:
+        st.dataframe(df_view[display_cols], use_container_width=True, hide_index=True)
+    else:
+        st.info("Sin registros aún.")
 
     st.markdown("---")
     if not dorsales:
